@@ -17,6 +17,8 @@ import random
 #   (print statements) are reserved for the engine-bot communication.
 import logging
 
+from bot_utils import choose_direction
+
 """ <<<Game Begin>>> """
 
 # This game object contains the initial game state.
@@ -66,9 +68,7 @@ while True:
             # For each of your ships, move randomly if the ship is on a low halite location or the ship is full.
             #   Else, collect halite.
             if game_map[ship.position].halite_amount < constants.MAX_HALITE / 10 or ship.is_full:
-                command_queue.append(
-                    ship.move(
-                        random.choice([ Direction.North, Direction.South, Direction.East, Direction.West ])))
+                command_queue.append(ship.move(choose_direction(game, ship)))
             else:
                 command_queue.append(ship.stay_still())
 
