@@ -17,7 +17,7 @@ import random
 #   (print statements) are reserved for the engine-bot communication.
 import logging
 
-from bot_utils import choose_direction
+from bot_utils import choose_direction, return_direction
 
 """ <<<Game Begin>>> """
 
@@ -57,8 +57,8 @@ while True:
             if ship.position == me.shipyard.position:
                 ship_status[ship.id] = "exploring"
             else:
-                move = game_map.naive_navigate(ship, me.shipyard.position)
-                command_queue.append(ship.move(move))
+                # move = game_map.naive_navigate(ship, me.shipyard.position)
+                command_queue.append(ship.move(return_direction(game, ship)))
                 continue
                 
         elif ship.halite_amount >= constants.MAX_HALITE / 4:
